@@ -10,6 +10,7 @@ interface FilterSettings {
   hideUnknownMissing: boolean;
   hideMissingParts: boolean;
   showAmazonLinks: boolean;
+  locationFilter: string;
 }
 
 const DEFAULT_SETTINGS: FilterSettings = {
@@ -18,6 +19,7 @@ const DEFAULT_SETTINGS: FilterSettings = {
   hideUnknownMissing: false,
   hideMissingParts: false,
   showAmazonLinks: true,
+  locationFilter: '',
 };
 
 // DOM elements
@@ -56,6 +58,7 @@ function updateUI(settings: FilterSettings): void {
   filterUnknownMissing.checked = settings.hideUnknownMissing;
   filterMissingParts.checked = settings.hideMissingParts;
   showAmazonLinks.checked = settings.showAmazonLinks;
+  locationFilter.value = settings.locationFilter;
 }
 
 /**
@@ -68,6 +71,7 @@ function getSettingsFromUI(): FilterSettings {
     hideUnknownMissing: filterUnknownMissing.checked,
     hideMissingParts: filterMissingParts.checked,
     showAmazonLinks: showAmazonLinks.checked,
+    locationFilter: locationFilter.value,
   };
 }
 
@@ -112,6 +116,10 @@ async function applyFilters(): Promise<void> {
 async function applyLocationFilter(): Promise<void> {
   const location = locationFilter.value;
 
+  // Save location preference to storage
+  const settings = getSettingsFromUI();
+  await saveSettings(settings);
+
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   if (!tab?.id || !tab.url?.includes('nellisauction.com')) {
     showStatus('Open a Nellis Auction page', 'error');
@@ -137,21 +145,6 @@ async function applyLocationFilter(): Promise<void> {
   }
 }
 
-/**
- * Detect current location from URL and update dropdown
- */
-async function detectCurrentLocation(): Promise<void> {
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  if (tab?.url?.includes('nellisauction.com')) {
-    try {
-      const url = new URL(tab.url);
-      const currentLocation = url.searchParams.get('Location Name') || '';
-      locationFilter.value = currentLocation;
-    } catch {
-      // Ignore URL parsing errors
-    }
-  }
-}
 
 /**
  * Reset filters to defaults
@@ -169,9 +162,6 @@ async function resetFilters(): Promise<void> {
 async function init(): Promise<void> {
   const settings = await loadSettings();
   updateUI(settings);
-
-  // Detect current location from URL
-  await detectCurrentLocation();
 
   applyButton.addEventListener('click', applyFilters);
   resetButton.addEventListener('click', resetFilters);

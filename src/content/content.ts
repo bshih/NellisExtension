@@ -11,6 +11,7 @@ interface FilterSettings {
   hideUnknownMissing: boolean;
   hideMissingParts: boolean;
   showAmazonLinks: boolean;
+  locationFilter: string;
 }
 
 const AMAZON_LINK_CLASS = 'nellis-helper-amazon-link';
@@ -23,6 +24,7 @@ let currentSettings: FilterSettings = {
   hideUnknownMissing: false,
   hideMissingParts: false,
   showAmazonLinks: true,
+  locationFilter: '',
 };
 
 /**
@@ -272,6 +274,26 @@ function applyFilters(): void {
 }
 
 /**
+ * Check if current URL has the saved location filter, redirect if not
+ */
+function checkLocationRedirect(): boolean {
+  const savedLocation = currentSettings.locationFilter;
+  if (!savedLocation) return false; // No saved location = no redirect needed
+
+  const url = new URL(window.location.href);
+  const currentLocation = url.searchParams.get('Location Name') || '';
+
+  if (currentLocation !== savedLocation) {
+    console.log(`Nellis Helper: Redirecting to saved location "${savedLocation}"`);
+    url.searchParams.set('Location Name', savedLocation);
+    window.location.href = url.toString();
+    return true; // Redirect initiated
+  }
+
+  return false; // No redirect needed
+}
+
+/**
  * Initialize the content script
  */
 async function init(): Promise<void> {
@@ -285,6 +307,11 @@ async function init(): Promise<void> {
     }
   } catch (e) {
     console.log('Nellis Helper: Could not load settings, using defaults');
+  }
+
+  // Check if we need to redirect to saved location
+  if (checkLocationRedirect()) {
+    return; // Page will reload, don't continue
   }
 
   // Try applying filters multiple times as page loads
