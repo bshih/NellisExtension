@@ -33,13 +33,30 @@ Other commands:
 - `npm run dev` — watch mode
 - `npm run typecheck` — TypeScript check
 - `npm test` — run tests
+- `npm run package` — create distributable zip in `release/`
 
 ## Install
 
-1. Build the extension (see above)
+### From Release (Recommended)
+
+1. Download the latest `nellis-auction-helper-vX.X.X.zip` from [Releases](https://github.com/bshih/NellisExtension/releases)
+2. Extract the zip to a folder
+3. Open `chrome://extensions`
+4. Enable "Developer mode" (top right)
+5. Click "Load unpacked" and select the extracted folder
+
+### From Source
+
+1. Clone and build:
+   ```bash
+   git clone https://github.com/bshih/NellisExtension.git
+   cd NellisExtension
+   npm install
+   npm run build
+   ```
 2. Open `chrome://extensions`
 3. Enable "Developer mode" (top right)
-4. Drag the entire NellisExtension folder into Chrome, or click "Load Unpacked" and select the project root folder (the one containing `manifest.json`)
+4. Click "Load unpacked" and select the project root folder
 
 ## Usage
 
