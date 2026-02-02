@@ -1,0 +1,45 @@
+/* Nellis Auction Helper Content Script Styles */
+
+/* Hidden items */
+.nellis-helper-hidden {
+  display: none !important;
+}
+
+/* Amazon link styling */
+.nellis-helper-amazon-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin: 4px 0;
+  padding: 3px 8px;
+  background: linear-gradient(135deg, #ff9900 0%, #ff6600 100%);
+  color: white !important;
+  text-decoration: none !important;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.nellis-helper-amazon-link:hover {
+  background: linear-gradient(135deg, #ffad33 0%, #ff7a1a 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  text-decoration: none !important;
+}
+
+.nellis-helper-amazon-link:active {
+  transform: translateY(0);
+}
+
+/* Add Amazon icon before text */
+.nellis-helper-amazon-link::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M15.93 17.09c-.18.19-.45.19-.64.01-2.28-1.91-5.06-3.02-8.09-3.02-3.64 0-6.61 1.35-6.61 1.35-.18.09-.36-.11-.27-.29.72-1.62 3.15-2.97 6.88-2.97 3.1 0 5.97 1.02 8.18 2.78.23.19.27.54.08.77-.05.06-.1.11-.16.15l.63.22zm1.84-2.12c-.24.3-.75.14-.75-.25 0-1.58 1.4-3.54 4.54-3.54 1.72 0 3.02.49 3.96 1.02.24.14.11.49-.17.49-1.1 0-2.88.35-4.06 1.15-.34.23-.76.61-1.21.96-.15.12-.31.17-.47.17h.16z"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+}

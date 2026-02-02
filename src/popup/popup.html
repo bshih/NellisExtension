@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nellis Auction Helper</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="header">
+        <h1>Nellis Auction Helper</h1>
+      </header>
+
+      <main class="content">
+        <!-- Condition Filters -->
+        <section class="section">
+          <h3>Hide Items by Condition</h3>
+          <div class="filter-list">
+            <label class="filter-item">
+              <input type="checkbox" id="filter-used" />
+              <span class="filter-label">Used</span>
+            </label>
+            <label class="filter-item">
+              <input type="checkbox" id="filter-minor-damage" />
+              <span class="filter-label">Minor Damage</span>
+            </label>
+            <label class="filter-item">
+              <input type="checkbox" id="filter-unknown-missing" />
+              <span class="filter-label">Unknown if Missing Parts</span>
+            </label>
+            <label class="filter-item">
+              <input type="checkbox" id="filter-missing-parts" />
+              <span class="filter-label">Missing Parts</span>
+            </label>
+          </div>
+        </section>
+
+        <!-- Location Filter -->
+        <section class="section">
+          <h3>Filter by Location (via URL)</h3>
+          <select id="location-filter">
+            <option value="">All Locations</option>
+            <option value="North Las Vegas">North Las Vegas</option>
+            <option value="Dean Martin">Dean Martin</option>
+            <option value="Henderson">Henderson</option>
+            <option value="Decatur">Decatur</option>
+          </select>
+          <button id="apply-location" class="btn primary" style="margin-top: 8px; width: 100%;">Go to Location</button>
+        </section>
+
+        <!-- Amazon Links -->
+        <section class="section">
+          <h3>Amazon Links</h3>
+          <label class="filter-item">
+            <input type="checkbox" id="show-amazon-links" checked />
+            <span class="filter-label">Show Amazon search links on items</span>
+          </label>
+        </section>
+
+        <!-- Apply Button -->
+        <div class="actions">
+          <button id="apply-filters" class="btn primary">Apply Filters</button>
+          <button id="reset-filters" class="btn secondary">Reset</button>
+        </div>
+      </main>
+
+      <div id="status" class="status hidden"></div>
+    </div>
+
+    <script src="../dist/popup.js"></script>
+  </body>
+</html>
