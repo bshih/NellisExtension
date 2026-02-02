@@ -39,8 +39,7 @@ Other commands:
 1. Build the extension (see above)
 2. Open `chrome://extensions`
 3. Enable "Developer mode" (top right)
-4. Click "Load unpacked"
-5. Select the **project root folder** (not `dist/`) — the folder containing `manifest.json`
+4. Drag the entire NellisExtension folder into Chrome, or click "Load Unpacked" and select the project root folder (the one containing `manifest.json`)
 
 ## Usage
 
