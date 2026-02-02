@@ -174,7 +174,6 @@ function addAmazonLink(card: HTMLElement, title: string): void {
   link.target = '_blank';
   link.rel = 'noopener noreferrer';
   link.className = AMAZON_LINK_CLASS;
-  link.textContent = 'Search on Amazon';
   link.title = `Search Amazon for: ${title}`;
 
   link.addEventListener('click', (e) => {
