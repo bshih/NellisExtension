@@ -148,7 +148,6 @@ function generateAmazonUrl(title: string): string {
   const cleanTitle = title
     .replace(/\d+\s*pack/gi, '')
     .replace(/\([^)]*\)/g, '')
-    .replace(/,.*$/, '')
     .replace(/\s+/g, ' ')
     .trim()
     .slice(0, 100);
